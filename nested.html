@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Nested Table</title>
+    <style>
+        /* Main table styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        table {
+            width: 100%;
+            max-width: 800px;
+            margin: 20px auto;
+            border-collapse: collapse;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            background-color: #fff;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        td {
+            background-color: #f9f9f9;
+        }
+
+        tr:nth-child(even) td {
+            background-color: #f1f1f1;
+        }
+
+        tr:hover {
+            background-color: #e8e8e8;
+        }
+
+        /* Nested table styling */
+        .nested-table {
+            width: 90%;
+            margin: 10px auto;
+            border: none;
+        }
+
+        .nested-table td {
+            background-color: #e9ecef;
+            padding: 8px;
+        }
+
+        /* Button styles */
+        .button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Dynamic Nested Table</h2>
+
+<!-- Main table -->
+<table id="mainTable">
+    <thead>
+        <tr>
+            <th>Header 1</th>
+            <th>Header 2</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Row 1, Col 1</td>
+            <td>
+                <table class="nested-table">
+                    <thead>
+                        <tr>
+                            <th>Nested Header 1</th>
+                            <th>Nested Header 2</th>
+                        </tr>
+                    </thead>
+                    <tbody id="nestedTable1">
+                        <tr>
+                            <td>Nested Row 1, Col 1</td>
+                            <td>Nested Row 1, Col 2</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button class="button" onclick="addNestedRow(1)">Add Row to Nested Table</button>
+            </td>
+        </tr>
+        <tr>
+            <td>Row 2, Col 1</td>
+            <td>
+                <table class="nested-table">
+                    <thead>
+                        <tr>
+                            <th>Nested Header 1</th>
+                            <th>Nested Header 2</th>
+                        </tr>
+                    </thead>
+                    <tbody id="nestedTable2">
+                        <tr>
+                            <td>Nested Row 1, Col 1</td>
+                            <td>Nested Row 1, Col 2</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button class="button" onclick="addNestedRow(2)">Add Row to Nested Table</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<script>
+    function addNestedRow(tableId) {
+        // Get the correct nested table body by tableId
+        const nestedTable = document.getElementById('nestedTable' + tableId);
+        
+        // Create a new row and cells
+        const newRow = document.createElement('tr');
+        const cell1 = document.createElement('td');
+        const cell2 = document.createElement('td');
+        
+        // Add sample data to new cells
+        cell1.textContent = 'Nested Row ' + (nestedTable.rows.length + 1) + ', Col 1';
+        cell2.textContent = 'Nested Row ' + (nestedTable.rows.length + 1) + ', Col 2';
+        
+        // Append cells to the row
+        newRow.appendChild(cell1);
+        newRow.appendChild(cell2);
+        
+        // Append the new row to the nested table body
+        nestedTable.appendChild(newRow);
+    }
+</script>
+
+</body>
+</html>
